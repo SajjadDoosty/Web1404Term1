@@ -1,0 +1,64 @@
+const fs = require('fs')
+
+const inputs = process.argv.slice(3);
+const command = process.argv[2];
+
+let result
+
+if (command === "sum") {
+    const a = Number(inputs[0])
+    const b = Number(inputs[1])
+
+    result = sum(a, b)
+}
+else if (command === "minus") {
+    const a = Number(inputs[0])
+    const b = Number(inputs[1])
+
+    result = minus(a, b)
+}
+else if (command === "multiply") {
+    const a = Number(inputs[0])
+    const b = Number(inputs[1])
+
+    result = multiply(a, b)
+}
+else if (command === "division") {
+    const a = Number(inputs[0])
+    const b = Number(inputs[1])
+
+    result = division(a, b)
+}
+else if (command == "write") {
+    const name = inputs[0]
+
+    if (name === undefined) {
+        result = "parameter [1] can't be empty."
+    }
+
+    fs.writeFileSync('./files/data.txt', JSON.stringify({ name: name }))
+
+    result = 'file saved.'
+}
+else {
+    console.log("command not found.")
+}
+
+console.log(result);
+
+
+function sum(a, b) {
+    return a + b
+}
+
+function minus(a, b) {
+    return a - b
+}
+
+function multiply(a, b) {
+    return a * b
+}
+
+function division(a, b) {
+    return a / b
+}
