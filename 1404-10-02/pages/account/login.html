@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+
+<body>
+    <div>
+        <input type="text" id="user">
+        <input type="text" id="pass">
+        <button type="button" id="btn-login">Login</button>
+    </div>
+
+    <script>
+        async function loginRequest() {
+            try {
+                const user = document.getElementById('user').value
+                const pass = document.getElementById('pass').value
+
+                const jsonData = {
+                    user: user,
+                    pass: pass,
+                }
+
+                console.log(jsonData);
+
+                const response =
+                    await fetch('http://localhost:80/login', {
+                        method: 'POST',
+                        body: JSON.stringify(jsonData),
+                    })
+
+                if (response.ok !== true) {
+                    console.log('request is not ok.');
+                }
+                else {
+                    console.log('login is successfully.');
+                }
+            } catch (error) {
+                console.log('error', error);
+            }
+        }
+
+        document.getElementById('btn-login').addEventListener('click', function () {
+            loginRequest()
+        })
+    </script>
+</body>
+
+</html>
